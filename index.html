@@ -96,6 +96,9 @@
                                 <option value="leica">
                                     <script>document.write(getI18n('leica'))</script>
                                 </option>
+                                <option value="canon">
+                                    <script>document.write(getI18n('canon'))</script>
+                                </option>
                                 <option value="nikon">
                                     <script>document.write(getI18n('nikon'))</script>
                                 </option>
@@ -134,6 +137,8 @@
                             <script>document.write(getI18n('original_size'))</script>
                         </option>
                         <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
                     </select>
                 </div>
                 <div class="mdui-textfield mdui-textfield-floating-label">
@@ -368,6 +373,9 @@
                     if (parseInt($('#zoom-select').val()) == 2) {
                         photoWidth = photoWidth * 2;
                         photoHeight = photoHeight * 2;
+                    } else{
+                        photoWidth = photoWidth * parseInt($('#zoom-select').val());
+                        photoHeight = photoHeight * parseInt($('#zoom-select').val());
                     }
 
                     photoCanvas.width = photoWidth;
