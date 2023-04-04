@@ -1,5 +1,6 @@
 # Photomark
 A tool to add watermark on a picture.
+deployed on github pages, but js code runs on the browser.
 
 ## Features
 * Multiple logos & fonts available

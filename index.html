@@ -164,7 +164,8 @@
                     <label class="mdui-textfield-label">
                         <script>document.write(getI18n('location'))</script>
                     </label>
-                    <input id="location-input" class="mdui-textfield-input" type="text" readonly />
+                    <input id="location-input" class="mdui-textfield-input" type="text" onclick="showLocationEditor()"
+                        readonly />
                 </div>
                 <div class="mdui-typo">
                     <a onclick="getLocation()" style="cursor: pointer;">
@@ -536,6 +537,42 @@
                                     photoExif.Make = $('#editor-make').val();
                                     photoExif.Model = $('#editor-model').val();
                                     $('#device-input').val(photoExif.Model);
+                                    drawImage(true);
+                                    history.back();
+                                } else {
+                                    mdui.snackbar({
+                                        message: getI18n('please_fill_in_each_blank'),
+                                        position: 'right-top'
+                                    });
+                                }
+                            }
+                        }
+                    ]
+                });
+            } else {
+                mdui.snackbar({
+                    message: getI18n('you_can_only_edit_unknown_model'),
+                    position: 'right-top'
+                });
+            }
+        }
+
+        function showLocationEditor() {
+            if ($('#location-input').val() == 'Unknown') {
+                mdui.dialog({
+                    title: getI18n('location_editor'),
+                    content: `<div class="mdui-textfield mdui-textfield-floating-label"><label class="mdui-textfield-label">${getI18n('location')}</label><input id="editor-location" class="mdui-textfield-input" type="text" /></div>`,
+                    buttons: [
+                        {
+                            text: getI18n('cancel')
+                        },
+                        {
+                            text: getI18n('ok'),
+                            close: false,
+                            onClick: () => {
+                                if ($('#editor-location').val() != '') {
+                                    var Location = $('#editor-location').val();
+                                    $('#location-input').val(Location);
                                     drawImage(true);
                                     history.back();
                                 } else {
